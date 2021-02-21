@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -15,7 +15,7 @@ var ConsumerSecret string
 func loadEnv() {
 	err = godotenv.Load()
 	if err != nil {
-		log.Fatalf("init.Env: Cannot load .env (%s)\n", err)
+		fmt.Printf("init.Env: Cannot load .env (%s)\n", err)
 	}
 
 	// backend url
