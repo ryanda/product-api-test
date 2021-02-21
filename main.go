@@ -23,6 +23,7 @@ func main() {
 	})
 
 	app.Get("/", micro.Index)
+	app.Get("/product", micro.Product)
 
 	app.Use(micro.NotFoundHandler)
 
