@@ -22,7 +22,7 @@ func loadEnv() {
 	BackendUrl = os.Getenv("BACKEND_URL")
 
 	// service config
-	ServicePort = os.Getenv("APP_PORT")
+	ServicePort = os.Getenv("PORT")
 
 	// creds
 	ConsumerKey = os.Getenv("CONSUMER_KEY")
