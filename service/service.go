@@ -9,6 +9,9 @@ import (
 )
 
 const LIMIT_DATA = "5"
+const ORDER_DESC = "desc"
+const ORDER_BY = "desc"
+const STATUS_PUBLISH = "desc"
 const SERVICE_ID = "Golang-Rest-Ryanda"
 
 func FetchProductData() string {
@@ -25,6 +28,9 @@ func FetchProductData() string {
 
 	q := url.Values{}
 	q.Add("per_page", LIMIT_DATA)
+	q.Add("order", ORDER_DESC)
+	q.Add("orderby", ORDER_BY)
+	q.Add("status", STATUS_PUBLISH)
 	q.Add("consumer_key", config.ConsumerKey)
 	q.Add("consumer_secret", config.ConsumerSecret)
 	req.URL.RawQuery = q.Encode()
