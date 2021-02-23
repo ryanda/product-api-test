@@ -21,5 +21,9 @@ func Product(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(response)
+	return c.JSON(&fiber.Map{
+		"success": false,
+		"data":    response,
+		"message": "",
+	})
 }
