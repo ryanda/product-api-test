@@ -13,8 +13,8 @@ import (
 
 const LIMIT_DATA = "5"
 const ORDER_DESC = "desc"
-const ORDER_BY = "desc"
-const STATUS_PUBLISH = "desc"
+const ORDER_BY = "date"
+const STATUS_PUBLISH = "publish"
 const SERVICE_ID = "Golang-Rest-Ryanda"
 
 func FetchProductData() ([]byte, error) {
