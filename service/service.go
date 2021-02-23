@@ -2,11 +2,13 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 
 	"github.com/ryanda/product-api-test/config"
+	"github.com/ryanda/product-api-test/obj"
 )
 
 const LIMIT_DATA = "5"
@@ -53,6 +55,11 @@ func FetchProductData() ([]byte, error) {
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
+
+	if resp.StatusCode != 200 {
+		errResponse, _ := obj.UnmarshalErrorResponse(body)
+		return nil, fmt.Errorf("%s: %s", errResponse.Code, errResponse.Message)
+	}
 
 	return body, nil
 }
