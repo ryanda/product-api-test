@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -14,13 +15,13 @@ const ORDER_BY = "desc"
 const STATUS_PUBLISH = "desc"
 const SERVICE_ID = "Golang-Rest-Ryanda"
 
-func FetchProductData() string {
+func FetchProductData() ([]byte, error) {
 
 	endpoint := config.BackendUrl + "/wc/v3/products"
 
 	req, err := http.NewRequest("GET", endpoint, nil)
 	if err != nil {
-		return "Error:" + err.Error()
+		return nil, err
 	}
 
 	req.Header.Set("X-Service", SERVICE_ID)
@@ -43,15 +44,15 @@ func FetchProductData() string {
 
 		// check if error occurred due to timeout
 		if urlErr.Timeout() {
-			return "Error occurred due to a timeout."
+			return nil, errors.New("Error occurred due to a timeout.")
 		}
 
-		// log error and exit
-		return "Error:" + err.Error()
+		// return generic err
+		return nil, err
 	}
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	return string(body)
+	return body, nil
 }
